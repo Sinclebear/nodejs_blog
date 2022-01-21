@@ -1,0 +1,23 @@
+{
+  "name": "nodejs_blog",
+  "version": "1.0.0",
+  "description": "Node.js 와 Express 로 구현하는 미니 블로그",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sinclebear/nodejs_blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sinclebear/nodejs_blog/issues"
+  },
+  "homepage": "https://github.com/Sinclebear/nodejs_blog#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
