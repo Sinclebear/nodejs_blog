@@ -6,6 +6,7 @@ const port = 3000;
 connect();
 
 const goodsRouter = require("./routes/goods");
+// const cartsRouter = require("./routes/carts");
 
 // 미들웨어는 순서가 중요..
 const requestMiddleware = (req, res, next) => {
@@ -17,7 +18,9 @@ app.use(express.json()); // body 에 json 형태로 들어오는 데이터를 �
 
 app.use(requestMiddleware);
 
-app.use("/api", goodsRouter);
+// app.use("/api", [goodsRouter, cartsRouter]);
+// 여러 라우터를 사용할 경우 배열 형태로 배치
+app.use("/api", [goodsRouter]);
 
 app.get("/", (req, res) => {
     res.send("Hello World!!@");
