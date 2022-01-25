@@ -31,12 +31,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get("/", async (req, res) => {
-    // const articles = await Articles.find().sort({createdAt: 'desc'});
-
-    res.send("Hello World!!@");
-    
-    // res.render('index', {articles: articles} );
-    
+    res.render('hello');  
 });
 
 app.listen(port, () => {
