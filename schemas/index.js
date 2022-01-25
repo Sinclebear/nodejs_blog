@@ -8,8 +8,7 @@ const connect = () => {
         mongoose.connect("mongodb://localhost:27017/blog_database", {
             "auth": {"authSource": "admin"},
             "user": "test",
-            "pass": "test",
-            "useMongoClient": true}, 
+            "pass": "test"}, 
             { ignoreUndefined: true }).catch((err) => {
         console.error(err)
     });
