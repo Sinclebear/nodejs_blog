@@ -5,7 +5,7 @@ const connect = () => {
     // local test의 경우
     // mongoose.connect("mongodb://localhost:27017/spa_database", { ignoreUndefined: true }).catch((err) => {
     // EC2 ubuntu 의 경우
-        mongoose.connect("mongodb://localhost:27017/blog_database", { ignoreUndefined: true }).catch((err) => {
+        mongoose.connect("mongodb://test:test@127.0.0.1:27017/blog_database", { ignoreUndefined: true }).catch((err) => {
         console.error(err)
     });
 };
