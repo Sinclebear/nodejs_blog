@@ -1,0 +1,87 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>나의 항해99 미니 블로그</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    
+        <!-- 커스텀 폰트 -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css" />
+    
+        <style>
+            * {
+                font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            }
+            #myblock {
+                margin-top : 24px;
+            }
+            #titleSummary {
+                width: 350px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space:nowrap;
+            }
+            #contentSummary{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3; /* 라인수 */
+                -webkit-box-orient: vertical;
+                word-wrap:break-word; 
+                line-height: 1.2em;
+                height: 3.6em;
+            }
+        </style>
+
+    </head>
+    <body>
+        <section class="hero is-info is-small">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <p class="title">나의 항해99 미니 블로그</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="container" id="card-container">
+            <div class="block" id="myblock">
+                <div class="buttons is-right">
+                    <a class="button is-primary" onclick="location.href='articles/write'">글쓰기</a>
+                </div>
+            </div>
+            <div class="columns is-multiline">
+                <% for(article of articles){ %>
+                <div class="column is-one-third">
+                    <div class="card is-shady" style="cursor: pointer;" onclick="location.href='/articles/<%=article.articleId%>'">
+                        <div class="card-content">
+                            <p class="title is-4" id="titleSummary">
+                                <%=article.title %>
+                            </p>
+                            <p class="subtitle" id="contentSummary">
+                                <%=article.content %>
+                            </p>
+                        </div>
+                        <footer class="card-footer">
+                            <p class="card-footer-item">
+                                <span>by <b><%=article.authorName %></b></span>
+                            </p>
+                            <p class="card-footer-item">
+                                <span>
+                                    <time><%=(article.createdAt).toLocaleDateString('ko-KR') %></time>
+                                </span>
+                            </p>
+                            <!-- <p class="card-footer-item">
+                                <span>
+                                    <a class="button is-link is-light" onclick="location.href='/articles/<%=article.articleId%>'">글 읽기</a>
+                                </span>
+                            </p> -->
+                        </footer>
+                    </div>    
+                </div>
+                <% } %>
+            </div>
+        </section>
+    </body>
+</html>
