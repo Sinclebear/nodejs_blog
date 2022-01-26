@@ -36,12 +36,13 @@ function getRandomInt(min, max) {
 router.post("/write", async (req, res) => {
 	const { title, content, authorName, articlePassword } = req.body;
 	console.log(req.body);
-	let articleId = getRandomInt(1,100000); // 얘도 데이터베이스에서 자동부여여야 할거같은데.. auto increment 같은
+	// let articleId = getRandomInt(1,100000); // mongoose-sequence 사용하여 자동 생성.
 	let authorId = 1; // 현재 개인 블로그라고 가정했으므로 사용자 = 1 로 고정
     
     // const article = await Articles.find({ articleId }); // articleId는 auto_increment 등 사용하여 겹칠일이 없으므로 불필요하지만, 선언
 
-	const postArticle = await Articles.create({ articleId, title, content, authorId, authorName, articlePassword });
+	// const postArticle = await Articles.create({ articleId, title, content, authorId, authorName, articlePassword });
+	const postArticle = await Articles.create({ title, content, authorId, authorName, articlePassword });
 	// res.json({ article: postArticle });
 	res.status(201).json({'result': 'success', 'msg': '글이 등록되었습니다.'})
 });
@@ -63,25 +64,31 @@ router.get("/:articleId/modify", async (req, res) => {
 router.patch("/:articleId/modify", async (req, res) => {
 	const { title, content, authorName, articlePassword, articleId } = req.body;
 	const [article] = await Articles.find({ articleId: Number(articleId) });
-	console.log(article.articlePassword);
-	console.log(articlePassword);
+	// console.log(article.articlePassword);
+	// console.log(articlePassword);
 	if (article.articlePassword !== articlePassword){
-		res.status(400).json({'result': 'error', 'msg': '비밀번호가 일치하지 않습니다.'}) // 이거 대체 뭘로 줌? response? error?
+		res.status(400).json({'result': 'error', 'msg': '비밀번호가 일치하지 않아요..!'}) // 이거 대체 뭘로 줌? response? error?
 	} else {
 		const modifyArticle = await Articles.updateOne({ articleId: Number(articleId)}, {$set: {title:title, content:content, authorName:authorName }});
 		res.status(201).json({'result': 'success', 'msg': '글이 수정되었습니다.'})
 	}	
 });
 
-// 장바구니 삭제
+// 블로그 글 삭제
 router.delete("/:articleId/modify", async (req, res) => {
-	const { articleId } = req.params;
+	const { articlePassword, articleId } = req.body;
 	const existsArticle = await Articles.find({ articleId: Number(articleId) });
+	// console.log("실제 저장된 비밀번호는 : " , existsArticle[0].articlePassword);
+	// console.log("사용자가 입력한 비밀번호는 : " , articlePassword);
+	// console.log("배열 크기는 : ", existsArticle.length);
 	if (existsArticle.length) { // existsArticle 배열의 길이가 0이 아닌 경우 = 쿼리 결과가 있는 경우
-		await Articles.deleteOne({ articleId: Number(articleId) });
+		if (existsArticle[0].articlePassword !== articlePassword){ // 글 지우기 전 입력받은 비밀번호 체크
+			res.status(400).json({'result': 'error', 'msg': '비밀번호가 일치하지 않네요.'}) // 이거 대체 뭘로 줌? response? error? xhr?
+		} else { 
+			await Articles.deleteOne({ articleId: Number(articleId) }); // articleId 일치하는 것으로 삭제
+			res.status(200).json({'result': 'success', 'msg': '글이 삭제되었습니다.'});
+		}
 	}
-
-	res.status(200).json({'result': 'success', 'msg': '글이 삭제되었습니다.'});
 });
 
 module.exports = router;
