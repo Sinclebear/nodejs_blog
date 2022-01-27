@@ -5,10 +5,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>나의 항해99 미니 블로그</title>
+
+        <!-- Bulma CSS 링크 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    
+
         <!-- 커스텀 폰트 -->
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css" />
+
+        <!-- font-awesome 링크  -->
+        <script src="https://kit.fontawesome.com/23b05056a7.js" crossorigin="anonymous"></script>
     
         <style>
             * {
@@ -48,7 +53,10 @@
         <section class="container" id="card-container">
             <div class="block" id="myblock">
                 <div class="buttons is-right">
-                    <a class="button is-primary" onclick="location.href='articles/write'">글쓰기</a>
+                    <a class="button is-primary" onclick="location.href='articles/write'">
+                        <span class="icon is-small"><i class="fas fa-pen"></i></span>
+                        <span>글쓰기</span>
+                    </a>
                 </div>
             </div>
             <div class="columns is-multiline">

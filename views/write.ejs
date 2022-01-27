@@ -11,13 +11,17 @@
     <% } else { %>
         글 수정하기
     <% } %></title>
-	<link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
-	<!-- Bulma Version 0.9.0-->
-	<link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <!-- AJAX 통신을 위한 jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bulma CSS 링크 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
     <!-- 커스텀 폰트 -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css" />
+
+    <!-- font-awesome 링크  -->
+    <script src="https://kit.fontawesome.com/23b05056a7.js" crossorigin="anonymous"></script>
 
     <style>
         * {
@@ -208,11 +212,20 @@
                         <input type="hidden" id="articleId" type="number" value="<%=article.articleId%>">
 						<div class="control">
                             <% if(!article) { %>
-							    <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium" onclick="writeArticle();">글쓰기</button>
+							    <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium" onclick="writeArticle();">
+                                    <span class="icon is-small"><i class="fas fa-pen"></i></span>
+                                    <span>글쓰기</span>
+                                </button>
                             <% } else { %>
-                                <div class="buttons is-right">
-                                    <button type="submit" class="button is-primary is-medium" onclick="modifyArticle();">수정하기</button>
-                                    <button type="submit" class="button is-danger is-medium" onclick="deleteArticle();">삭제하기</button>
+                                <div class="buttons is-centered">
+                                    <button type="submit" class="button is-primary is-medium" onclick="modifyArticle();">
+                                        <span class="icon is-small"><i class="fas fa-edit"></i></span>
+                                        <span>수정하기</span>
+                                    </button>
+                                    <button type="submit" class="button is-danger is-medium" onclick="deleteArticle();">
+                                        <span class="icon is-small"><i class="fas fa-trash"></i></span>
+                                        <span>삭제하기</span>
+                                    </button>
                                 </div>
                             <% } %>
 						</div>
